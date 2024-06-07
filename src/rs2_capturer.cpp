@@ -29,7 +29,8 @@ CAPTURER_SETUP_CODE RS2Capturer::init()
 		
 	} catch (...) {
 		return exception_handler().first;	
-	} 
+	}
+	
     return CAPTURER_SETUP_CODE::StartedCorrectly;
 }
 
@@ -47,11 +48,13 @@ CAPTURER_SETUP_CODE RS2Capturer::capture_next_frame()
 			rgb.get_bytes_per_pixel(),
 			rgb.get_stride_in_bytes(),
             pc.calculate(depth),
-			static_cast<const uint8_t*>(rgb.get_data())
+			static_cast<const uint8_t*>(rgb.get_data()),
+			frame_nr
         ));
     } catch (...) {
         return exception_handler().first;
     }
+	frame_nr++;
     return CAPTURER_SETUP_CODE::StartedCorrectly;
 }
 

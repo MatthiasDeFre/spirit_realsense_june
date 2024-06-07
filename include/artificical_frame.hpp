@@ -4,7 +4,7 @@
 #include "frame.hpp"
 class ArtificalFrame : public Frame {
     public:
-        ArtificalFrame(unsigned int side_size) {
+        ArtificalFrame(unsigned int side_size, unsigned int _frame_nr) : Frame(_frame_nr) {
             make_data_arrays(side_size);
 
         };

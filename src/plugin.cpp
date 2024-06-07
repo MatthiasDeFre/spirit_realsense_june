@@ -109,6 +109,7 @@ void start_capturing() {
 	capture_done = false;
 	keep_working = true;
 	while (keep_working) {
+
 		auto code = capturer->capture_next_frame();
 		if (code != 0) {
 			keep_working = false;
@@ -133,7 +134,7 @@ int initialize(uint32_t width, uint32_t height, uint32_t fps, bool _use_cam) {
 		if(use_cam) {
 			capturer = new RS2Capturer(848, 480, 30);
 		} else {
-			capturer = new ArtificalCapturer(40, 30);
+			capturer = new ArtificalCapturer(10, 30);
 		}
 	} catch (CAPTURER_SETUP_CODE e) {
 		initialized = true;
@@ -153,6 +154,7 @@ PointCloud* poll_next_point_cloud() {
 		return nullptr;
 	}
 	return new PointCloud{
+		frame->get_frame_nr(),
 		frame->get_frame_size(),
 		frame->get_vertex_array(),
 		frame->get_color_array(),

@@ -28,6 +28,8 @@ class Capturer {
         virtual void stop() { frame_buffer.stop_buffer(); };
         virtual Frame* poll_next_frame() = 0; 
     protected:
+        unsigned int frame_nr = 0;
         unsigned int fps;
         FrameBuffer frame_buffer;
+
 };
